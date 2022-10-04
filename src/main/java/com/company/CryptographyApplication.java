@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.cipher.CaesarCipher;
+import com.company.cipher.ViginereCipher;
 import com.company.common.Cipher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -12,13 +13,13 @@ import org.springframework.context.annotation.Bean;
 @RequiredArgsConstructor
 public class CryptographyApplication {
 
-    private final CaesarCipher cipher;
+    private final ViginereCipher cipher;
     @Bean
     public CommandLineRunner run() {
         CommandLineRunner clr = new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                System.out.println(cipher.encrypt(4,"ATTACKATONCE"));
+                System.out.println(cipher.encrypt("ARMY","ATTACKATONCE"));
             }
 
         };

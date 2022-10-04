@@ -4,9 +4,9 @@ import com.company.common.Cipher;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CaesarCipher implements Cipher {
+public class CaesarCipher implements Cipher<Integer> {
     @Override
-    public String encrypt(int key, String plainText) {
+    public String encrypt(Integer key, String plainText) {
         StringBuilder cipherText= new StringBuilder();
         for(int i=0;i<plainText.length();i++){
             if(Character.isLowerCase(plainText.charAt(i))){

@@ -1,5 +1,5 @@
 package com.company.common;
 
-public interface Cipher {
-    String encrypt(int key,String plainText);
+public interface Cipher<E> {
+    String encrypt(E key,String plainText);
 }
