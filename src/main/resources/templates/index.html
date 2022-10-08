@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Encrypt</title>
 </head>
 <body>
-<form method="POST">
+<form method="POST" action="encrypt">
     <input placeholder="Enter text.." type="text" maxlength="30" minlength="2" id="plaintext" name="plaintext">
+    <label>Choose encryption algorithm</label>
+    <select class="form-select" name="algorithims" id="algorithims">
+        <option th:each="algorithim: ${algorithims}" th:value="${algorithim}" th:text="${algorithim}"></option>
+    </select>
+
     <label>Key</label>
-    <input type="number" max="25" min="1" id="key" name="key">
+    <input type="number" max="25" min="1" name="key">
     <br>
     <button type="submit">Encrypt</button>
     <br>
     <label>Cipher text</label>
-    <input disabled name="ciphertext" id="ciphertext">
+    <input disabled name="ciphertext">
+</form>
+<form method="POST" action="decrypt">
+    <input placeholder="Enter text.." type="text" maxlength="30" minlength="2" name="ciphertext">
+    <label>Choose decryption algorithm</label>
+    <select class="form-select" name="algorithim" id="algorithims2">
+        <option th:each="algorithim: ${algorithims}" th:value="${algorithim}" th:text="${algorithim}"></option>
+    </select>
+
+    <label>Key</label>
+    <input type="number" max="25" min="1" id="key" name="key">
+    <br>
+    <button type="submit">Decrypt</button>
+    <br>
+    <label>Plain text</label>
+    <input disabled name="plaintext">
 </form>
 </body>
 </html>
