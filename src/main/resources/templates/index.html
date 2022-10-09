@@ -7,7 +7,17 @@
     function getOptionValue(){
       var e = document.getElementById("algorithims");
       var value = e.value;
-      return value;
+      if(value='Affine' || value='Caesar'){
+      document.getElementById("key").insertAdjacentHTML( 'beforeend',`
+      <label>Key</label>
+        <input type="number" max="25" min="1" name="key">`);
+       }
+       else if(value='Viginere'){
+             document.getElementById("key").insertAdjacentHTML('beforeend',`
+      <label>Keyyyy</label>
+        <input type="number" max="25" min="1" name="key">`);
+       }
+
       }
     </script>
 </head>
@@ -15,12 +25,13 @@
 <form method="POST" action="encrypt">
     <input placeholder="Enter text.." type="text" maxlength="30" minlength="2" id="plaintext" name="plaintext">
     <label>Choose encryption algorithm</label>
-    <select class="form-select" name="algorithims" id="algorithims">
+    <select onclick="getOptionValue()" class="form-select" name="algorithims" id="algorithims">
         <option th:each="algorithim: ${algorithims}" th:value="${algorithim}" th:text="${algorithim}"></option>
     </select>
-    <input th:value="getOptionValue()">
-    <label>Key</label>
-    <input type="number" max="25" min="1" name="key">
+    <div id="key">
+        <label>Key</label>
+        <input type="number" max="25" min="1" name="key">
+    </div>
     <br>
     <button type="submit">Encrypt</button>
     <br>
@@ -36,7 +47,7 @@
     </select>
 
     <label>Key</label>
-    <input type="number" max="25" min="1" id="key" name="key">
+    <input type="number" max="25" min="1" name="key">
     <br>
     <button type="submit">Decrypt</button>
     <br>
