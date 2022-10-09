@@ -19,7 +19,6 @@ public class CryptographyApplication {
         CommandLineRunner clr = new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                System.out.println(cipher.encrypt(Arrays.asList(7,9),"IAMSECRET"));
             }
 
         };
