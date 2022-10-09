@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Encrypt</title>
+    <script  th:inline="javascript">
+    function getOptionValue(){
+      var e = document.getElementById("algorithims");
+      var value = e.value;
+      return value;
+      }
+    </script>
 </head>
 <body>
 <form method="POST" action="encrypt">
@@ -11,7 +18,7 @@
     <select class="form-select" name="algorithims" id="algorithims">
         <option th:each="algorithim: ${algorithims}" th:value="${algorithim}" th:text="${algorithim}"></option>
     </select>
-
+    <input th:value="getOptionValue()">
     <label>Key</label>
     <input type="number" max="25" min="1" name="key">
     <br>
@@ -20,6 +27,7 @@
     <label>Cipher text</label>
     <input disabled name="ciphertext">
 </form>
+<br>
 <form method="POST" action="decrypt">
     <input placeholder="Enter text.." type="text" maxlength="30" minlength="2" name="ciphertext">
     <label>Choose decryption algorithm</label>
