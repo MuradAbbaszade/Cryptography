@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Encrypt</title>
     <script  th:inline="javascript">
@@ -9,21 +10,19 @@
       var value = e.value;
       if(value=='Caesar'){
       document.encryptform.action='index/encrypt/caesar';
-      document.getElementById('key').innerHTML="<label>Key</label>"+
-      "<input type='number' max='25' min='1' name='key' />";
+      document.getElementById('key').innerHTML=
+      "<input placeholder="Key" type='number' max='25' min='1' name='key' />";
        }
        else if(value=='Viginere'){
        document.encryptform.action='index/encrypt/viginere';
-      document.getElementById('key').innerHTML="<label>Key</label>"+
-      "<input type='text' max='30' min='2' name='key' />";
+      document.getElementById('key').innerHTML=
+      "<input placeholder="Key" type='text' max='30' min='2' name='key' />";
        }
       else if(value=='Affine'){
       document.encryptform.action='index/encrypt/affine';
-      document.getElementById('key').innerHTML="<label>Key</label>"+"&nbsp"+
-      "<label>a</label>"+
-      "<input type='number' max='25' min='1' name='a' id='a' />"+"&nbsp"+
-      "<label>b</label>"+
-      "<input type='number' max='25' min='1' name='b' id='b' />";
+      document.getElementById('key').innerHTML=
+      "<input placeholder="First key" type='number' max='25' min='1' name='a' id='a' />"+"&nbsp"+
+      "<input placeholder="Second key" type='number' max='25' min='1' name='b' id='b' />";
        }
       }
 
@@ -31,58 +30,56 @@
           var e = document.getElementById("algorithims2");
       var value = e.value;
       if(value=='Caesar'){
-      document.getElementById('key2').innerHTML="<label>Key</label>"+
-      "<input type='number' max='25' min='1' name='key' />";
+      document.decryptform.action='index/encrypt/caesar';
+      document.getElementById('key2').innerHTML=
+      "<input placeholder="Key" type='number' max='25' min='1' name='key' />";
        }
        else if(value=='Viginere'){
-      document.getElementById('key2').innerHTML="<label>Key</label>"+
-      "<input type='text' max='30' min='2' name='key' />";
+       document.decryptform.action='index/encrypt/viginere';
+      document.getElementById('key2').innerHTML=
+      "<input placeholder="Key" type='text' max='30' min='2' name='key' />";
        }
       else if(value=='Affine'){
-      document.getElementById('key2').innerHTML="<label>Key</label>"+"&nbsp"+
-      "<label>a</label>"+
-      "<input type='number' max='25' min='1' name='a' />"+"&nbsp"+
-      "<label>b</label>"+
-      "<input type='number' max='25' min='1' name='b' />";
+      document.decryptform.action='index/encrypt/affine';
+      document.getElementById('key2').innerHTML=
+      "<input placeholder="First key" type='number' max='25' min='1' name='a' />"+"&nbsp"+
+      "<input placeholder="Second key" type='number' max='25' min='1' name='b' />";
        }
       }
     </script>
 </head>
 <body>
+<div style="margin-top:150px" align="center" class="container">
 <form name="encryptform" method="GET" action="index/encrypt/caesar">
     <input placeholder="Enter text.." type="text" maxlength="30" minlength="2" id="plaintext" name="plaintext">
-    <label>Choose encryption algorithm</label>
+    &nbsp
+    <label>Encryption algorithm</label>
     <select onclick="updateEncriptionKey()" class="form-select" name="algorithims" id="algorithims">
         <option th:each="algorithim: ${algorithims}" th:value="${algorithim}" th:text="${algorithim}"></option>
     </select>
     <div id="key">
-        <label>Key</label>
-        <input type="number" max="25" min="1" name="key">
+        <input placeholder="Key" type="number" max="25" min="1" name="key">
     </div>
     <br>
-    <button onclick="affineCipherKeySum()" type="submit">Encrypt</button>
-    <br>
-    <label>Cipher text</label>
-    <input th:value="${cipherText}" readonly name="ciphertext">
+    <button class="btn btn-danger" onclick="affineCipherKeySum()" type="submit">Encrypt</button>
+    &nbsp
+    <input th:value="${cipherText}" placeholder="Cipher text" readonly name="ciphertext">
 </form>
-<br>
-
-<form method="GET" action="decrypt">
+<form style="margin-top:80px" method="GET" action="decrypt" name="decryptform">
     <input placeholder="Enter text.." type="text" maxlength="30" minlength="2" name="ciphertext">
-    <label>Choose decryption algorithm</label>
+    &nbsp
+    <label>Decryption algorithm</label>
     <select onclick="updateDecryptionKey()" class="form-select" name="algorithim" id="algorithims2">
         <option th:each="algorithim: ${algorithims}" th:value="${algorithim}" th:text="${algorithim}"></option>
     </select>
-
     <div id="key2">
-        <label>Key</label>
-        <input type="number" max="25" min="1" name="key">
+        <input placeholder="Key" type="number" max="25" min="1" name="key">
     </div>
     <br>
-    <button type="submit">Decrypt</button>
-    <br>
-    <label>Plain text</label>
-    <input disabled name="plaintext">
+    <button class="btn btn-success" type="submit">Decrypt</button>
+    &nbsp
+    <input placeholder="Plain text" readonly name="plaintext">
 </form>
+</div>
 </body>
 </html>
