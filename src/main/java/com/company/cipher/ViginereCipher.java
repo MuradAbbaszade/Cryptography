@@ -17,11 +17,11 @@ public class ViginereCipher implements Cipher<String> {
             if (j == key.length()) {
                 j = 0;
             }
-            c = (char) (((int) plainText.charAt(i) - 97 +
-                    ((int) key.charAt(j) - 97)) % 26 + 97);
+            c = (char) ((( plainText.charAt(i) - 97) +
+                    (key.charAt(j) - 97)) % 26 + 97);
             cipherText.append(c);
+            j++;
         }
-        j++;
         return cipherText.toString();
     }
 
