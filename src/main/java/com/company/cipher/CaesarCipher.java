@@ -22,4 +22,32 @@ public class CaesarCipher implements Cipher<Integer> {
             }
         return cipherText.toString();
     }
+
+    @Override
+    public String decrypt(Integer key, String cipherText) {
+        StringBuilder plainText= new StringBuilder();
+        for(int i=0;i<cipherText.length();i++){
+            if(Character.isLowerCase(cipherText.charAt(i))){
+                if(cipherText.charAt(i)-key<0) {
+                    char c = (char) (((cipherText.charAt(i) - key) +26 - 97) % 26 + 97);
+                    plainText.append(c);
+                }
+                else{
+                    char c = (char) (((cipherText.charAt(i) - key) - 97) % 26 + 97);
+                    plainText.append(c);
+                }
+            }
+            else{
+                if(cipherText.charAt(i)-key<0) {
+                    char c = (char) (((cipherText.charAt(i) - key) +26 - 65) % 26 + 65);
+                    plainText.append(c);
+                }
+                else{
+                    char c = (char) (((cipherText.charAt(i) - key) - 65) % 26 + 65);
+                    plainText.append(c);
+                }
+            }
+        }
+        return plainText.toString();
+    }
 }

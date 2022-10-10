@@ -29,9 +29,11 @@ public class EncryptController {
     private List<String> algorithims = Arrays.asList("Caesar","Affine","Viginere");
     @GetMapping
     public String showEncryptPage(Model model,
-                                  @RequestParam(value="cipherText",required = false) String cipherText){
+                                  @RequestParam(value="cipherText",required = false) String cipherText,
+                                  @RequestParam(value="plaintext",required = false) String plainText){
         model.addAttribute("algorithims",algorithims);
         model.addAttribute("cipherText",cipherText);
+        model.addAttribute("plaintext",plainText);
         return "index";
     }
     @GetMapping("encrypt/affine")
@@ -58,7 +60,7 @@ public class EncryptController {
     @GetMapping("encrypt/caesar")
     public ModelAndView caesar(@RequestParam("plaintext")String plainText,
                          @RequestParam("key")Integer key) {
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView();
         mv.setView(new RedirectView("/index"));
         String cipherText = caesarCipher.encrypt(key,plainText);
         mv.addObject("cipherText",cipherText);

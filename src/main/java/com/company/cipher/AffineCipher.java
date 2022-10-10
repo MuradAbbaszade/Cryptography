@@ -22,4 +22,9 @@ public class AffineCipher implements Cipher<List<Integer>> {
         }
         return cipherText.toString();
     }
+
+    @Override
+    public String decrypt(List<Integer> key, String cipherText) {
+        return null;
+    }
 }

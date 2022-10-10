@@ -10,10 +10,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.Arrays;
 
 @SpringBootApplication
-@RequiredArgsConstructor
 public class CryptographyApplication {
-
-    private final AffineCipher cipher;
     @Bean
     public CommandLineRunner run() {
         CommandLineRunner clr = new CommandLineRunner() {

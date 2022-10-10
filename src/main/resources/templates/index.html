@@ -11,18 +11,18 @@
       if(value=='Caesar'){
       document.encryptform.action='index/encrypt/caesar';
       document.getElementById('key').innerHTML=
-      "<input placeholder="Key" type='number' max='25' min='1' name='key' />";
+      "<input placeholder='Key' type='number' max='25' min='1' name='key' />";
        }
        else if(value=='Viginere'){
        document.encryptform.action='index/encrypt/viginere';
       document.getElementById('key').innerHTML=
-      "<input placeholder="Key" type='text' max='30' min='2' name='key' />";
+      "<input placeholder='Key' type='text' max='30' min='2' name='key' />";
        }
       else if(value=='Affine'){
       document.encryptform.action='index/encrypt/affine';
       document.getElementById('key').innerHTML=
-      "<input placeholder="First key" type='number' max='25' min='1' name='a' id='a' />"+"&nbsp"+
-      "<input placeholder="Second key" type='number' max='25' min='1' name='b' id='b' />";
+      "<input placeholder='First key' type='number' max='25' min='1' name='a' id='a' />"+"&nbsp"+
+      "<input placeholder='Second key' type='number' max='25' min='1' name='b' id='b' />";
        }
       }
 
@@ -30,20 +30,20 @@
           var e = document.getElementById("algorithims2");
       var value = e.value;
       if(value=='Caesar'){
-      document.decryptform.action='index/encrypt/caesar';
+      document.decryptform.action='index/decrypt/caesar';
       document.getElementById('key2').innerHTML=
-      "<input placeholder="Key" type='number' max='25' min='1' name='key' />";
+      "<input placeholder='Key' type='number' max='25' min='1' name='key' />";
        }
        else if(value=='Viginere'){
-       document.decryptform.action='index/encrypt/viginere';
+       document.decryptform.action='index/decrypt/viginere';
       document.getElementById('key2').innerHTML=
-      "<input placeholder="Key" type='text' max='30' min='2' name='key' />";
+      "<input placeholder='Key' type='text' max='30' min='2' name='key' />";
        }
       else if(value=='Affine'){
-      document.decryptform.action='index/encrypt/affine';
+      document.decryptform.action='index/decrypt/affine';
       document.getElementById('key2').innerHTML=
-      "<input placeholder="First key" type='number' max='25' min='1' name='a' />"+"&nbsp"+
-      "<input placeholder="Second key" type='number' max='25' min='1' name='b' />";
+      "<input placeholder='First key' type='number' max='25' min='1' name='a' />"+"&nbsp"+
+      "<input placeholder='Second key' type='number' max='25' min='1' name='b' />";
        }
       }
     </script>
@@ -65,7 +65,8 @@
     &nbsp
     <input th:value="${cipherText}" placeholder="Cipher text" readonly name="ciphertext">
 </form>
-<form style="margin-top:80px" method="GET" action="decrypt" name="decryptform">
+
+<form style="margin-top:80px" method="GET" action="index/decrypt/caesar" name="decryptform">
     <input placeholder="Enter text.." type="text" maxlength="30" minlength="2" name="ciphertext">
     &nbsp
     <label>Decryption algorithm</label>
@@ -78,7 +79,7 @@
     <br>
     <button class="btn btn-success" type="submit">Decrypt</button>
     &nbsp
-    <input placeholder="Plain text" readonly name="plaintext">
+    <input th:value="${plaintext}" placeholder="Plain text" readonly name="plaintext">
 </form>
 </div>
 </body>
