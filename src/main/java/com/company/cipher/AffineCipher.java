@@ -3,6 +3,7 @@ package com.company.cipher;
 import com.company.common.Cipher;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Component
@@ -23,14 +24,11 @@ public class AffineCipher implements Cipher<List<Integer>> {
     public String decrypt(List<Integer> key, String cipherText) {
         cipherText = cipherText.toLowerCase();
         StringBuilder plainText = new StringBuilder();
+        BigInteger inverse = BigInteger.valueOf(key.get(0)).modInverse(BigInteger.valueOf(26));
         for(int i=0;i<cipherText.length();i++){
             char c ;
-            int x = (~key.get(0)*(cipherText.charAt(i)-key.get(1)))%26;
-            if(x<0){
-                c=(char)(x+26+97);
-            }else{
-                c=(char)(x+97);
-            }
+            int decoded = inverse.intValue() * (cipherText.charAt(i) - 'a' - key.get(1) + 26);
+            c = (char) (decoded % 26 + 'a');
             plainText.append(c);
         }
         return plainText.toString();
